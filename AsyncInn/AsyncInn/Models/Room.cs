@@ -10,6 +10,11 @@ namespace AsyncInn.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public Layout RoomLayout { get; set; }
+
+        //Navigation Properties 
+
+        public HotelRoom HotelRoom { get; set; }
+        public RoomAmenities RoomAmenities { get; set; }
     }
 
     public enum Layout
