@@ -14,7 +14,7 @@ Rooms: Rooms indicates a specific room type that can vary based on layout. A roo
 
 Amenities: There are a variety of amenities such as air-conditioning, a coffee maker, etc. A room can have many different amenities which is represented in the 1:many relationship.
 
-RoomAmenities: This is a pure join table that has a combination of AmenitiesID and RoomID as a composite key.
+RoomAmenities: This is a pure join table that has a combination of AmenitiesID and RoomID as a composite key. The many:1 relationship assures that an amenity will only be applied to a room once. 
 
 HotelRoom: This table has a composite key of HotelID and RoomNumber. This allows multiple hotel locations to use the same room number. 
 
