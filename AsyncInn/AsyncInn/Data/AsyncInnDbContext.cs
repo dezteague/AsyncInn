@@ -62,6 +62,16 @@ namespace AsyncInn.Data
                     Phone = "(503)555-9876"
                 }
                 );
+
+            modelBuilder.Entity<Room>().HasData(
+                new Room
+                {
+                    ID = 1,
+                    Name = "",
+                    RoomLayout = 
+                }
+                )
+
         }
 
         public DbSet<Amenities> Amenities { get; set; }

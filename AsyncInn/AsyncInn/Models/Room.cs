@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,9 +19,12 @@ namespace AsyncInn.Models
     }
 
     public enum Layout
-    {
-        Studio,
-        OneBedroom,
-        TwoBedroom
+    {   
+        [Display(Name="Studio")]
+        Studio = 0,
+        [Display(Name="One bedroom")]
+        OneBedroom = 1,
+        [Display(Name = "Two bedroom")]
+        TwoBedroom = 2
     }
 }
