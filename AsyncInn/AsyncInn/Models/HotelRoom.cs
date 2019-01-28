@@ -15,7 +15,7 @@ namespace AsyncInn.Models
         public int RoomID { get; set; }
         public decimal Rate { get; set; }
 
-        [Display(Name = "Pets")]
+        [Display(Name = "Pets Allowed")]
         public bool PetFriendly { get; set; }
 
         //Navigation Properties

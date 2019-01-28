@@ -11,11 +11,11 @@ namespace AsyncInn.Models
     {
         public int ID { get; set; }
         [Required]
-        [Display(Name = "Room Name:")]
+        [Display(Name = "Room Name")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Studio, 1 bdrm, 2 bdrm:")]
+        [Display(Name = "Studio, 1 bdrm, 2 bdrm")]
         public int Layout { get; set; }
 
         //Navigation Properties 

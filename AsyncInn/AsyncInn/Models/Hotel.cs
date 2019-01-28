@@ -11,15 +11,15 @@ namespace AsyncInn.Models
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Hotel Name:")]
+        [Display(Name = "Hotel Name")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "City:")]
+        [Display(Name = "City")]
         public string Address { get; set; }
 
         [Required]
-        [Display(Name = "Phone number:")]
+        [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 
         //Navigation Properties
