@@ -107,6 +107,37 @@ namespace AsyncInn.Data
                 }
                 );
 
+            modelBuilder.Entity<Amenities>().HasData(
+                new Amenities
+                {
+                    ID = 1,
+                    Name = "Microwave"
+                },
+
+                new Amenities
+                {
+                    ID = 2,
+                    Name = "Coffee Maker"
+                },
+
+                new Amenities
+                {
+                    ID = 3,
+                    Name = "Mini Bar"
+                },
+
+                new Amenities
+                {
+                    ID = 4,
+                    Name = "Hair Dryer"
+                },
+
+                new Amenities
+                {
+                    ID = 5,
+                    Name = "Iron"
+                }
+                );
         }
 
         public DbSet<Amenities> Amenities { get; set; }
