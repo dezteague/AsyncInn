@@ -67,10 +67,45 @@ namespace AsyncInn.Data
                 new Room
                 {
                     ID = 1,
-                    Name = "",
-                    RoomLayout = 
+                    Name = "Belltown Studio",
+                    Layout = 0
+                },
+
+                new Room
+                {
+                    ID = 2,
+                    Name = "Space Needle Studio",
+                    Layout = 0
+                },
+
+                new Room
+                {
+                    ID = 3,
+                    Name = "Rain Room",
+                    Layout = 1
+                },
+
+                new Room
+                {
+                    ID = 4,
+                    Name = "Seahawks Manor",
+                    Layout = 1
+                },
+
+                new Room
+                {
+                    ID = 5,
+                    Name = "Mariner Suite",
+                    Layout = 2
+                },
+
+                new Room
+                {
+                    ID = 6,
+                    Name = "Sonic Suite",
+                    Layout = 2
                 }
-                )
+                );
 
         }
 
