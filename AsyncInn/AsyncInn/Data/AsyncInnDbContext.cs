@@ -19,6 +19,49 @@ namespace AsyncInn.Data
             //composite key associations
             modelBuilder.Entity<HotelRoom>().HasKey(ce => new { ce.HotelID, ce.RoomNumber });
             modelBuilder.Entity<RoomAmenities>().HasKey(ce => new { ce.AmenitiesID, ce.RoomID });
+
+            //seed database
+            modelBuilder.Entity<Hotel>().HasData(
+                new Hotel
+                {
+                    ID = 1,
+                    Name = "Async Downtown Seattle",
+                    Address = "Seattle, WA",
+                    Phone = "(206)555-1234"
+                },
+
+                new Hotel
+                {
+                    ID = 2,
+                    Name = "Async West Seattle",
+                    Address = "West Seattle, WA",
+                    Phone = "(206)555-5678"
+                },
+
+                new Hotel
+                {
+                    ID = 3,
+                    Name = "Async Bellevue",
+                    Address = "Bellevue, WA",
+                    Phone = "(425)555-9012"
+                },
+
+                new Hotel
+                {
+                    ID = 4,
+                    Name = "Async Olympia",
+                    Address = "Olympia, WA",
+                    Phone = "(360)555-2468"
+                },
+
+                new Hotel
+                {
+                    ID = 5,
+                    Name = "Async Portland",
+                    Address = "Portland, Oregon",
+                    Phone = "(503)555-9876"
+                }
+                );
         }
 
         public DbSet<Amenities> Amenities { get; set; }
