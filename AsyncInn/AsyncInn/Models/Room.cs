@@ -15,7 +15,7 @@ namespace AsyncInn.Models
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Studio, 1 bdrm, 2 bdrm")]
+        [Display(Name = "Room Layout")]
         public int Layout { get; set; }
 
         //Navigation Properties 
