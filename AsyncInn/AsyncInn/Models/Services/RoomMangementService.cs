@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data;
 using AsyncInn.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,39 +17,36 @@ namespace AsyncInn.Models.Services
             _context = context;
         }
 
-        public void CreateRoom(Room room)
+        //create
+        public async Task CreateRoom(Room room)
         {
-            throw new NotImplementedException();
+            _context.Rooms.Add(room);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteRoom(Room room)
+        //read
+        public async Task<IEnumerable<Room>> GetRooms()
         {
-            throw new NotImplementedException();
+            return await _context.Rooms.ToListAsync();
         }
 
-        public void DeleteRoom(int id)
+        public async Task<Room> GetRoom(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Rooms.FirstOrDefaultAsync(rm => rm.ID == id);
         }
 
-        public Room GetRoom(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Room GetRoom(string name)
-        {
-            throw new NotImplementedException();
-        }
-
+        //update
         public void UpdateRoom(Room room)
         {
-            throw new NotImplementedException();
+            _context.Rooms.Update(room);
         }
 
-        public void EditRoom(Room room)
+        //delete
+        public void DeleteRoom(int id)
         {
-            throw new NotImplementedException();
+            Room room = _context.Rooms.FirstOrDefault(rm => rm.ID == id);
+            _context.Rooms.Remove(room);
+            _context.SaveChanges();
         }
     }
 }
