@@ -8,7 +8,7 @@ namespace AsyncInn.Models.Interfaces
     interface IHotelManager
     {
         //create 
-        void CeateHotel(Hotel hotel);
+        void CreateHotel(Hotel hotel);
 
         //read
 

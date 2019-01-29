@@ -1,4 +1,5 @@
-﻿using AsyncInn.Models.Interfaces;
+﻿using AsyncInn.Data;
+using AsyncInn.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,14 @@ namespace AsyncInn.Models.Services
 {
     public class HotelManagementService : IHotelManager
     {
-        public void CeateHotel(Hotel hotel)
+        private AsyncInnDbContext _context { get; }
+
+        public HotelManagementService(AsyncInnDbContext context)
+        {
+            _context = context;
+        }
+
+        public void CreateHotel(Hotel hotel)
         {
             throw new NotImplementedException();
         }
@@ -19,6 +27,11 @@ namespace AsyncInn.Models.Services
         }
 
         public void DeleteHotel(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditHotel(Hotel hotel)
         {
             throw new NotImplementedException();
         }

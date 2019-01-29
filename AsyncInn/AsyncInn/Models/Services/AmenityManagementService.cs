@@ -1,4 +1,5 @@
-﻿using AsyncInn.Models.Interfaces;
+﻿using AsyncInn.Data;
+using AsyncInn.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,14 @@ namespace AsyncInn.Models.Services
 {
     public class AmenityManagementService : IAmenityManager
     {
-        public void CeateAmenity(Amenities amenities)
+        private AsyncInnDbContext _context { get; }
+
+        public AmenityManagementService(AsyncInnDbContext context)
+        {
+            _context = context;
+        }
+
+        public void CreateAmenity(Amenities amenities)
         {
             throw new NotImplementedException();
         }
@@ -19,6 +27,11 @@ namespace AsyncInn.Models.Services
         }
 
         public void DeleteAmenity(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditAmenity(Amenities amenities)
         {
             throw new NotImplementedException();
         }

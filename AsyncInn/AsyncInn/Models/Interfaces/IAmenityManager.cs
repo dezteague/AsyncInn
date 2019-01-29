@@ -8,7 +8,7 @@ namespace AsyncInn.Models.Interfaces
     interface IAmenityManager
     {
         //create 
-        void CeateAmenity(Amenities amenities);
+        void CreateAmenity(Amenities amenities);
 
         //read
 

@@ -8,7 +8,7 @@ namespace AsyncInn.Models.Interfaces
     interface IRoomManager
     {
         //create 
-        void CeateRoom(Room room);
+        void CreateRoom(Room room);
 
         //read
 

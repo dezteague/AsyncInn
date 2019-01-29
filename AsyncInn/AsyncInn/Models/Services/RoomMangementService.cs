@@ -1,4 +1,5 @@
-﻿using AsyncInn.Models.Interfaces;
+﻿using AsyncInn.Data;
+using AsyncInn.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,14 @@ namespace AsyncInn.Models.Services
 {
     public class RoomMangementService : IRoomManager
     {
-        public void CeateRoom(Room room)
+        private AsyncInnDbContext _context { get; }
+
+        public RoomMangementService(AsyncInnDbContext context)
+        {
+            _context = context;
+        }
+
+        public void CreateRoom(Room room)
         {
             throw new NotImplementedException();
         }
@@ -34,6 +42,11 @@ namespace AsyncInn.Models.Services
         }
 
         public void UpdateRoom(Room room)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditRoom(Room room)
         {
             throw new NotImplementedException();
         }
