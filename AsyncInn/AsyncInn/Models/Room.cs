@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,8 +10,13 @@ namespace AsyncInn.Models
     public class Room
     {
         public int ID { get; set; }
+        [Required]
+        [Display(Name = "Room Name")]
         public string Name { get; set; }
-        public Layout RoomLayout { get; set; }
+
+        [Required]
+        [Display(Name = "Room Layout")]
+        public int Layout { get; set; }
 
         //Navigation Properties 
 
@@ -18,9 +25,12 @@ namespace AsyncInn.Models
     }
 
     public enum Layout
-    {
-        Studio,
-        OneBedroom,
-        TwoBedroom
+    {   
+        [Display(Name="Studio")]
+        Studio = 0,
+        [Display(Name="One bedroom")]
+        OneBedroom = 1,
+        [Display(Name = "Two bedroom")]
+        TwoBedroom = 2
     }
 }
