@@ -10,6 +10,7 @@ namespace AsyncInn.Models.Services
 {
     public class AmenityManagementService : IAmenityManager
     {
+        //connect database to service
         private AsyncInnDbContext _context { get; }
 
         public AmenityManagementService(AsyncInnDbContext context)

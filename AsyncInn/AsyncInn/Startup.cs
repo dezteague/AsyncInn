@@ -16,6 +16,7 @@ namespace AsyncInn
     {
         public IConfiguration Configuration { get; }
 
+        //allows multiple types of configuration, set up for dependency injection
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,8 +25,10 @@ namespace AsyncInn
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //declare dependencies
             services.AddMvc();
 
+            //connecting the database options, based on sql connection string
             services.AddDbContext<AsyncInnDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -38,8 +41,10 @@ namespace AsyncInn
                 app.UseDeveloperExceptionPage();
             }
 
+            //to add css stylesheet
             app.UseStaticFiles();
 
+            //default to home index
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
