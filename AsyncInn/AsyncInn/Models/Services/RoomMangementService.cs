@@ -30,23 +30,30 @@ namespace AsyncInn.Models.Services
             return await _context.Rooms.ToListAsync();
         }
 
-        public async Task<Room> GetRoom(int id)
+        public async Task<Room> GetRoom(int? id)
         {
             return await _context.Rooms.FirstOrDefaultAsync(rm => rm.ID == id);
         }
 
         //update
-        public void UpdateRoom(Room room)
+        public async Task UpdateRoom(Room room)
         {
             _context.Rooms.Update(room);
+            await _context.SaveChangesAsync();
         }
 
         //delete
-        public void DeleteRoom(int id)
+        public async Task DeleteRoom(int id)
         {
             Room room = _context.Rooms.FirstOrDefault(rm => rm.ID == id);
             _context.Rooms.Remove(room);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+
+        //Confirm room existence
+        public bool RoomExists(int id)
+        {
+            return _context.Rooms.Any(ex => ex.ID == id);
         }
     }
 }

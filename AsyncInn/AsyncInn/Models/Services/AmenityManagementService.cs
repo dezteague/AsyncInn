@@ -31,23 +31,30 @@ namespace AsyncInn.Models.Services
             return await _context.Amenities.ToListAsync();
         }
 
-        public async Task<Amenities> GetAmenity(int id)
+        public async Task<Amenities> GetAmenity(int? id)
         {
             return await _context.Amenities.FirstOrDefaultAsync(amen => amen.ID == id);
         }
 
         //update
-        public void UpdateAmenity(Amenities amenities)
+        public async Task UpdateAmenity(Amenities amenities)
         {
             _context.Amenities.Update(amenities);
+            await _context.SaveChangesAsync();
         }
 
         //delete
-        public void DeleteAmenity(int id)
+        public async Task DeleteAmenity(int id)
         {
             Amenities amenity = _context.Amenities.FirstOrDefault(amen => amen.ID == id);
             _context.Amenities.Remove(amenity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+
+        //confirm Amenity Existence
+        public bool AmenityExists(int id)
+        {
+            return _context.Amenities.Any(amen => amen.ID == id);
         }
     }
 }
