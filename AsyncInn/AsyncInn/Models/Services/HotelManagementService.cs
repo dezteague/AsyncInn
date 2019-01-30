@@ -30,23 +30,30 @@ namespace AsyncInn.Models.Services
             return await _context.Hotels.ToListAsync();
         }
 
-        public async Task<Hotel> GetHotel(int id)
+        public async Task<Hotel> GetHotel(int? id)
         {
             return await _context.Hotels.FirstOrDefaultAsync(htl => htl.ID ==id);
         }
 
         //update
-        public void UpdateHotel(Hotel hotel)
+        public async Task UpdateHotel(Hotel hotel)
         {
             _context.Hotels.Update(hotel);
+            await _context.SaveChangesAsync();
         }
 
         //delete
-        public void DeleteHotel(int id)
+        public async Task DeleteHotel(int id)
         {
             Hotel hotel = _context.Hotels.FirstOrDefault(htl => htl.ID == id);
             _context.Hotels.Remove(hotel);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+        }
+
+        //confirm hotel Existence
+        public bool HotelExists(int id)
+        {
+            return _context.Hotels.Any(htl => htl.ID == id);
         }
     }
 }
