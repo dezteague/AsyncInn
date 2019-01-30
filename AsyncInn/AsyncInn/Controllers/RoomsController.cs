@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
+using AsyncInn.Models.Interfaces;
 
 namespace AsyncInn.Controllers
 {
     public class RoomsController : Controller
     {
-        private readonly AsyncInnDbContext _context;
+        private readonly IRoomManager _rooms;
 
-        public RoomsController(AsyncInnDbContext context)
+        public RoomsController(IRoomManager rooms)
         {
-            _context = context;
+            _rooms = rooms;
         }
 
         // GET: Rooms
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Rooms.ToListAsync());
+            return View( _rooms.GetRooms());
         }
 
         // GET: Rooms/Details/5
@@ -58,8 +59,7 @@ namespace AsyncInn.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(room);
-                await _context.SaveChangesAsync();
+                await _rooms.CreateRoom(room);
                 return RedirectToAction(nameof(Index));
             }
             return View(room);

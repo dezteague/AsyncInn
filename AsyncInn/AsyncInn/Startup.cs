@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AsyncInn.Data;
+using AsyncInn.Models.Interfaces;
+using AsyncInn.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +18,7 @@ namespace AsyncInn
     {
         public IConfiguration Configuration { get; }
 
+        //allows multiple types of configuration, set up for dependency injection
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,10 +27,16 @@ namespace AsyncInn
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //declare dependencies
             services.AddMvc();
 
+            //connecting the database options, based on sql connection string
             services.AddDbContext<AsyncInnDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IRoomManager, RoomMangementService>();
+            services.AddScoped<IHotelManager, HotelManagementService>();
+            services.AddScoped<IAmenityManager, AmenityManagementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +47,10 @@ namespace AsyncInn
                 app.UseDeveloperExceptionPage();
             }
 
+            //to add css stylesheet
             app.UseStaticFiles();
 
+            //default to home index
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
