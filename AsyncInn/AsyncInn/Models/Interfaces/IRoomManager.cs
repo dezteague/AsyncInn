@@ -12,16 +12,18 @@ namespace AsyncInn.Models.Interfaces
 
         //read
 
-        Task<Room> GetRoom(int id);
+        Task<Room> GetRoom(int? id);
 
         Task<IEnumerable<Room>> GetRooms();
 
         //update/edit
 
-        void UpdateRoom(Room room);
+        Task UpdateRoom(Room room);
 
         //delete
 
-        void DeleteRoom(int id);
+        Task DeleteRoom(int id);
+
+        bool RoomExists(int id);
     }
 }
