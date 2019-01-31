@@ -29,7 +29,7 @@ namespace AsyncInn.Controllers
                          select h;
             if (!String.IsNullOrEmpty(searchString))
             {
-                hotels = hotels.Where(htl => htl.Address.Contains(searchString));
+                hotels = hotels.Where(htl => htl.Name.Contains(searchString));
             }
             return View(await hotels.ToListAsync());
         }

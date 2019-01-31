@@ -14,16 +14,24 @@ namespace AsyncInn.Controllers
     public class AmenitiesController : Controller
     {
         private readonly IAmenityManager _context;
+        private readonly AsyncInnDbContext _amenities;
 
-        public AmenitiesController(IAmenityManager context)
+        public AmenitiesController(IAmenityManager context, AsyncInnDbContext amenities)
         {
             _context = context;
+            _amenities = amenities;
         }
 
         // GET: Amenities
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.GetAmenities());
+            var amenities = from h in _amenities.Amenities
+                         select h;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                amenities = amenities.Where(amen => amen.Name.Contains(searchString));
+            }
+            return View(await amenities.ToListAsync());
         }
 
         // GET: Amenities/Details/5
@@ -48,6 +56,12 @@ namespace AsyncInn.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // POST: Amenities/Create
