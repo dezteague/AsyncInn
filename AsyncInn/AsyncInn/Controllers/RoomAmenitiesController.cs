@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AsyncInn.Data;
+using AsyncInn.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AsyncInn.Data;
-using AsyncInn.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AsyncInn.Controllers
 {
@@ -128,17 +126,14 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int amenityid, int roomid)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+   
 
             var roomAmenities = await _context.RoomAmenities
                 .Include(r => r.Amenities)
                 .Include(r => r.Room)
-                .FirstOrDefaultAsync(m => m.AmenitiesID == id);
+                .FirstOrDefaultAsync(m => m.AmenitiesID == amenityid && m.AmenitiesID == roomid);
             if (roomAmenities == null)
             {
                 return NotFound();
@@ -150,9 +145,13 @@ namespace AsyncInn.Controllers
         // POST: RoomAmenities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int amenityid, int roomid)
         {
-            var roomAmenities = await _context.RoomAmenities.FindAsync(id);
+            var roomAmenities = await _context.RoomAmenities
+                .Include(r => r.Amenities)
+                .Include(r => r.Room)
+                .FirstOrDefaultAsync(m => m.AmenitiesID == amenityid && m.AmenitiesID == roomid);
+
             _context.RoomAmenities.Remove(roomAmenities);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
