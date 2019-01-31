@@ -14,16 +14,24 @@ namespace AsyncInn.Controllers
     public class HotelsController : Controller
     {
         private readonly IHotelManager _context;
+        private readonly AsyncInnDbContext _hotels;
 
-        public HotelsController(IHotelManager context)
+        public HotelsController(IHotelManager context, AsyncInnDbContext hotels)
         {
             _context = context;
+            _hotels = hotels;
         }
 
         // GET: Hotels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.GetHotels());
+            var hotels = from h in _hotels.Hotels
+                         select h;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hotels = hotels.Where(htl => htl.Name.Contains(searchString));
+            }
+            return View(await hotels.ToListAsync());
         }
 
         // GET: Hotels/Details/5
@@ -48,6 +56,12 @@ namespace AsyncInn.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // POST: Hotels/Create
@@ -80,6 +94,8 @@ namespace AsyncInn.Controllers
             }
             return View(hotel);
         }
+
+   
 
         // POST: Hotels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

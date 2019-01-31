@@ -8,6 +8,15 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-controller="Hotels" asp-action="Index" method="get">
+    <p>
+        Search by Name: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<p>Total Hotels: @Model.Count()</p>
 <table class="table">
     <thead>
         <tr>
