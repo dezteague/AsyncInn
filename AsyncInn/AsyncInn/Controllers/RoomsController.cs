@@ -14,16 +14,24 @@ namespace AsyncInn.Controllers
     public class RoomsController : Controller
     {
         private readonly IRoomManager _context;
+        private readonly AsyncInnDbContext _rooms;
 
-        public RoomsController(IRoomManager context)
+        public RoomsController(IRoomManager context, AsyncInnDbContext rooms)
         {
             _context = context;
+            _rooms = rooms;
         }
 
         // GET: Rooms
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.GetRooms());
+            var rooms = from r in _rooms.Rooms
+                         select r;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                rooms = rooms.Where(rm => rm.Name.Contains(searchString));
+            }
+            return View(await rooms.ToListAsync());
         }
 
         // GET: Rooms/Details/5
@@ -48,6 +56,12 @@ namespace AsyncInn.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // POST: Rooms/Create
