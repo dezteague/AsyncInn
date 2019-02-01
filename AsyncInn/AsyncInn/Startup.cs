@@ -19,12 +19,12 @@ namespace AsyncInn
         public IConfiguration Configuration { get; }
 
         //allows multiple types of configuration, set up for dependency injection
-        public Startup()
+        public Startup(IConfiguration configuration)
         {
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
             builder.AddUserSecrets<Startup>();
             Configuration = builder.Build();
-           
+            Configuration = configuration;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -35,7 +35,7 @@ namespace AsyncInn
 
             //connecting the database options, based on sql connection string
             services.AddDbContext<AsyncInnDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration["ConnectionStrings:ProductionConnection"]));
 
             services.AddScoped<IRoomManager, RoomMangementService>();
             services.AddScoped<IHotelManager, HotelManagementService>();
