@@ -37,6 +37,33 @@ namespace AsyncInnCRUDtests
         }
 
         [Fact]
+        public async void CanReadHotel()
+        {
+            //testing hotel management service
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("GetHotel").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                //arrange
+                Hotel hotel = new Hotel();
+                hotel.ID = 1;
+                hotel.Name = "Downtown";
+                hotel.Address = "Seattle";
+                hotel.Phone = "(206)555-9999";
+                //act 
+                HotelManagementService hotelservice = new HotelManagementService(context);
+
+                await hotelservice.CreateHotel(hotel);
+                await hotelservice.GetHotel(1);
+
+                var result = context.Hotels.FirstOrDefault(h => h.ID == h.ID);
+                //assert
+                Assert.Equal(hotel, result);
+            }
+        }
+
+        [Fact]
         public async void CanUpdateHotel()
         {
             //testing hotel management service
@@ -122,6 +149,33 @@ namespace AsyncInnCRUDtests
         }
 
         [Fact]
+        public async void CanReadRoom()
+        {
+            //testing hotel management service
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("GetRoom").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                //arrange
+                Room room = new Room();
+                room.ID = 1;
+                room.Name = "Downtown";
+                room.Layout = 0;
+
+                //act 
+                RoomMangementService roomservice = new RoomMangementService(context);
+
+                await roomservice.CreateRoom(room);
+                await roomservice.GetRoom(1);
+
+                var result = context.Rooms.FirstOrDefault(r => r.ID == r.ID);
+                //assert
+                Assert.Equal(room, result);
+            }
+        }
+
+        [Fact]
         public async void CanUpdateRoom()
         {
             //testing hotel management service
@@ -196,6 +250,32 @@ namespace AsyncInnCRUDtests
                 AmenityManagementService amenityservice = new AmenityManagementService(context);
 
                 await amenityservice.CreateAmenity(amenity);
+
+                var result = context.Amenities.FirstOrDefault(a => a.ID == a.ID);
+                //assert
+                Assert.Equal(amenity, result);
+            }
+        }
+
+        [Fact]
+        public async void CanReadAmenity()
+        {
+            //testing hotel management service
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("GetAmenity").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                //arrange
+                Amenities amenity = new Amenities();
+                amenity.ID = 1;
+                amenity.Name = "toaster";
+
+                //act 
+                AmenityManagementService amenityservice = new AmenityManagementService(context);
+
+                await amenityservice.CreateAmenity(amenity);
+                await amenityservice.GetAmenity(1);
 
                 var result = context.Amenities.FirstOrDefault(a => a.ID == a.ID);
                 //assert
