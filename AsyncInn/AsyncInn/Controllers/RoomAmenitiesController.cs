@@ -25,9 +25,9 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? roomid, int? amenityid)
         {
-            if (id == null)
+            if (roomid == null || amenityid == null)
             {
                 return NotFound();
             }
@@ -35,7 +35,7 @@ namespace AsyncInn.Controllers
             var roomAmenities = await _context.RoomAmenities
                 .Include(r => r.Amenities)
                 .Include(r => r.Room)
-                .FirstOrDefaultAsync(m => m.AmenitiesID == id);
+                .FirstOrDefaultAsync(m => m.RoomID == roomid && m.AmenitiesID == amenityid);
             if (roomAmenities == null)
             {
                 return NotFound();
@@ -71,14 +71,17 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? roomid, int? amenityid)
         {
-            if (id == null)
+            if (roomid == null && amenityid == null)
             {
                 return NotFound();
             }
 
-            var roomAmenities = await _context.RoomAmenities.FindAsync(id);
+            var roomAmenities = await _context.RoomAmenities
+                .Include(r => r.Amenities)
+                .Include(r => r.Room)
+                .FirstOrDefaultAsync(m => m.RoomID == roomid && m.AmenitiesID == amenityid);
             if (roomAmenities == null)
             {
                 return NotFound();
@@ -93,12 +96,9 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AmenitiesID,RoomID")] RoomAmenities roomAmenities)
+        public async Task<IActionResult> Edit(int roomid, int amenityid, [Bind("AmenitiesID,RoomID")] RoomAmenities roomAmenities)
         {
-            if (id != roomAmenities.AmenitiesID)
-            {
-                return NotFound();
-            }
+            
 
             if (ModelState.IsValid)
             {
