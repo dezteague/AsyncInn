@@ -41,7 +41,7 @@ namespace AsyncInnCRUDtests
         {
             //testing hotel management service
             DbContextOptions<AsyncInnDbContext> options =
-                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateHotel").Options;
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("UpdateHotel").Options;
 
             using (AsyncInnDbContext context = new AsyncInnDbContext(options))
             {
@@ -65,6 +65,33 @@ namespace AsyncInnCRUDtests
                 var result = context.Hotels.FirstOrDefault(h => h.ID == h.ID);
                 //assert
                 Assert.Equal(hotel, result);
+            }
+        }
+
+        [Fact]
+        public async void CanDeleteHotel()
+        {
+            //testing hotel management service
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateHotel").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                //arrange
+                Hotel hotel = new Hotel();
+                hotel.ID = 1;
+                hotel.Name = "Downtown";
+                hotel.Address = "Seattle";
+                hotel.Phone = "(206)555-9999";
+                //act 
+                HotelManagementService hotelservice = new HotelManagementService(context);
+
+                await hotelservice.CreateHotel(hotel);
+                await hotelservice.DeleteHotel(1);
+
+                var result = context.Hotels.Any(htl => htl.ID == 1);
+                //assert
+                Assert.False(result);
             }
         }
 
@@ -99,7 +126,7 @@ namespace AsyncInnCRUDtests
         {
             //testing hotel management service
             DbContextOptions<AsyncInnDbContext> options =
-                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateRoom").Options;
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("UpdateRoom").Options;
 
             using (AsyncInnDbContext context = new AsyncInnDbContext(options))
             {
@@ -125,11 +152,38 @@ namespace AsyncInnCRUDtests
         }
 
         [Fact]
+        public async void CanDeleteRoom()
+        {
+            //testing hotel management service
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("DeleteRoom").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                //arrange
+                Room room = new Room();
+                room.ID = 1;
+                room.Name = "Downtown";
+                room.Layout = 0;
+
+                //act 
+                RoomMangementService roomservice = new RoomMangementService(context);
+
+                await roomservice.CreateRoom(room);
+                await roomservice.DeleteRoom(1);
+
+                var result = context.Rooms.Any(rm => rm.ID == 1);
+                //assert
+                Assert.False(result);
+            }
+        }
+
+        [Fact]
         public async void CanCreateAmenity()
         {
             //testing hotel management service
             DbContextOptions<AsyncInnDbContext> options =
-                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateAmenity").Options;
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("UpdateAmenity").Options;
 
             using (AsyncInnDbContext context = new AsyncInnDbContext(options))
             {
@@ -174,6 +228,32 @@ namespace AsyncInnCRUDtests
                 var result = context.Amenities.FirstOrDefault(a => a.ID == a.ID);
                 //assert
                 Assert.Equal(amenity, result);
+            }
+        }
+
+        [Fact]
+        public async void CanDeleteAmenity()
+        {
+            //testing hotel management service
+            DbContextOptions<AsyncInnDbContext> options =
+                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("DeleteAmenity").Options;
+
+            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
+            {
+                //arrange
+                Amenities amenity = new Amenities();
+                amenity.ID = 1;
+                amenity.Name = "toaster";
+
+                //act 
+                AmenityManagementService amenityservice = new AmenityManagementService(context);
+
+                await amenityservice.CreateAmenity(amenity);
+                await amenityservice.DeleteAmenity(1);
+
+                var result= context.Amenities.Any(am => am.ID == 1);
+                //assert
+                Assert.False(result);
             }
         }
     }
