@@ -25,3 +25,20 @@ HotelRoom: This table has a composite key of HotelID and RoomNumber. This allows
 3. Run IIS Express
 4. Navigate website in your browser
 
+## Usage Examples
+
+The top navigation bar persists throughout the web app.  If the user clicks on "Hotels" they will be able to view all of the hotels in the datbase
+
+![hotels](https://github.com/dezteague/LAB13-AsyncInn/blob/master/AsyncInn/Assets/hotels.JPG)
+
+Users can create a new hotel by entering a name, address, and phone number.
+
+![create](https://github.com/dezteague/LAB13-AsyncInn/blob/master/AsyncInn/Assets/createhotel.JPG)
+
+Users may edit the details of an exisiting hotel
+![edit](https://github.com/dezteague/LAB13-AsyncInn/blob/master/AsyncInn/Assets/edithotel.JPG)
+
+Lastly, deletions from the database will be handled careful by requiring the user to confirm before eliminating the data. 
+
+![delete](https://github.com/dezteague/LAB13-AsyncInn/blob/master/AsyncInn/Assets/deletehotel.JPG)
+
