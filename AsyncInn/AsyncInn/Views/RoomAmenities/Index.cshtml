@@ -24,14 +24,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Amenities.ID)
+                @Html.DisplayFor(modelItem => item.Amenities.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Room.ID)
+                @Html.DisplayFor(modelItem => item.Room.Name)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { item.RoomID, item.Amenities.ID }) 
-                @Html.ActionLink("Details", "Details", new { item.RoomID, item.Amenities.ID }) 
                 @Html.ActionLink("Delete", "Delete", new { item.RoomID, item.Amenities.ID })
             </td>
         </tr>
