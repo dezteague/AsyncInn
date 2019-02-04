@@ -106,32 +106,5 @@ namespace AsyncInnTest
             Assert.Equal(1, room.ID);
             Assert.Equal(1, amenity.ID);
         }
-
-
-        [Fact]
-        public async void CanCreateHotel()
-        {
-            //testing hotel management service
-            DbContextOptions<AsyncInnDbContext> options = 
-                new DbContextOptionsBuilder<AsyncInnDbContext>().UseInMemoryDatabase("CreateHotel").Options;
-
-            using (AsyncInnDbContext context = new AsyncInnDbContext(options))
-            {
-                //arrange
-                Hotel hotel = new Hotel();
-                hotel.ID = 1;
-                hotel.Name = "Downtown";
-                hotel.Address = "Seattle";
-                hotel.Phone = "(206)555-9999";
-                //act 
-                HotelManagementService hotelservice = new HotelManagementService(context);
-
-                await hotelservice.CreateHotel(hotel);
-
-                var result = context.Hotels.FirstOrDefault(h => h.ID == h.ID);
-                //assert
-                Assert.Equal(hotel, result);
-            }
-        }
     }
 }
