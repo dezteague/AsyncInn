@@ -106,5 +106,18 @@ namespace AsyncInnTest
             Assert.Equal(1, room.ID);
             Assert.Equal(1, amenity.ID);
         }
+
+        [Fact]
+        public void CanGetHotelRoomID()
+        {
+            Room room = new Room();
+            room.ID = 1;
+            Hotel hotel = new Hotel();
+            hotel.ID = 1;
+
+            //can retrieve amenity id for a specific room
+            Assert.Equal(1, room.ID);
+            Assert.Equal(1, hotel.ID);
+        }
     }
 }
