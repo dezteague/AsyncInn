@@ -36,7 +36,7 @@ namespace AsyncInn.Controllers
         /// </summary>
         /// <param name="hotelid"></param>
         /// <param name="roomid"></param>
-        /// <returns>hotel room view</returns>
+        /// <returns>details view</returns>
         public async Task<IActionResult> Details(int? hotelid, int? roomid)
         {
             if (hotelid == null || roomid == null)
