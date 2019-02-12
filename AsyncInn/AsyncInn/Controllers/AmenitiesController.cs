@@ -23,6 +23,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Amenities
+        /// <summary>
+        /// Gets all amenities (allows search filter) and displays them on the index page
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns>amenity view</returns>
         public async Task<IActionResult> Index(string searchString)
         {
             var amenities = from h in _amenities.Amenities
@@ -35,6 +40,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Amenities/Details/5
+        /// <summary>
+        /// Show the details of an amentiy
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>details view</returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,11 +63,15 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Amenities/Create
+        /// <summary>
+        /// Displays the create an amenity page
+        /// </summary>
+        /// <returns>create view</returns>
         public IActionResult Create()
         {
             return View();
         }
-
+        
         [HttpPost]
         public string Index(string searchString, bool notUsed)
         {
@@ -81,6 +95,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Amenities/Edit/5
+        /// <summary>
+        /// Display details of an amenity for editing
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>edit view</returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -132,6 +151,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Amenities/Delete/5
+        /// <summary>
+        /// Shows amenities to be deleted
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>delete view page</returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
