@@ -27,7 +27,7 @@ namespace AsyncInn.Controllers
         /// Gets all amenities (allows search filter) and displays them on the index page
         /// </summary>
         /// <param name="searchString"></param>
-        /// <returns>amenity view</returns>
+        /// <returns>index view</returns>
         public async Task<IActionResult> Index(string searchString)
         {
             var amenities = from h in _amenities.Amenities

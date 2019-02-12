@@ -23,6 +23,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Rooms
+        /// <summary>
+        /// Get all rooms
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(string searchString)
         {
             var rooms = from r in _rooms.Rooms
@@ -35,6 +40,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Rooms/Details/5
+        /// <summary>
+        /// show details of a room
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>room view</returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,6 +63,10 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Rooms/Create
+        /// <summary>
+        /// Create a room
+        /// </summary>
+        /// <returns>room view</returns>
         public IActionResult Create()
         {
             return View();
@@ -80,6 +94,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Rooms/Edit/5
+        /// <summary>
+        /// Show details of a room for editing
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>room view</returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

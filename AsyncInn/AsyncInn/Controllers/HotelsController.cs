@@ -44,7 +44,7 @@ namespace AsyncInn.Controllers
         /// show details of a hotel
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>details view</returns>
+        /// <returns>detail view</returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -98,7 +98,7 @@ namespace AsyncInn.Controllers
         /// Shows details of a hotel for editing
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>edit view</returns>
+        /// <returns>hotel view</returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

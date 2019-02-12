@@ -90,7 +90,7 @@ namespace AsyncInn.Controllers
         /// </summary>
         /// <param name="roomid"></param>
         /// <param name="amenityid"></param>
-        /// <returns></returns>
+        /// <returns>edit view</returns>
         public async Task<IActionResult> Edit(int? roomid, int? amenityid)
         {
             if (roomid == null && amenityid == null)
