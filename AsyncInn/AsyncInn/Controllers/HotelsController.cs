@@ -23,6 +23,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Hotels
+        /// <summary>
+        /// Get all hotels
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns>hotel view</returns>
         public async Task<IActionResult> Index(string searchString)
         {
             var hotels = from h in _hotels.Hotels
@@ -35,6 +40,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Hotels/Details/5
+        /// <summary>
+        /// show details of a hotel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>detail view</returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,6 +63,10 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Hotels/Create
+        /// <summary>
+        /// Create a hotel
+        /// </summary>
+        /// <returns>create view</returns>
         public IActionResult Create()
         {
             return View();
@@ -80,6 +94,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Hotels/Edit/5
+        /// <summary>
+        /// Shows details of a hotel for editing
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>hotel view</returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -133,6 +152,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Hotels/Delete/5
+        /// <summary>
+        /// Show hotel to be deleted
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>delete view</returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

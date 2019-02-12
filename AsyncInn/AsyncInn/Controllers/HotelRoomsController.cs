@@ -20,6 +20,10 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms
+        /// <summary>
+        /// Gets all hotel rooms 
+        /// </summary>
+        /// <returns>hotel room view</returns>
         public async Task<IActionResult> Index()
         {
             var asyncInnDbContext = _context.HotelRooms.Include(h => h.Hotel).Include(h => h.Room);
@@ -27,6 +31,12 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Details/5
+        /// <summary>
+        /// show the details of a hotel room
+        /// </summary>
+        /// <param name="hotelid"></param>
+        /// <param name="roomid"></param>
+        /// <returns>details view</returns>
         public async Task<IActionResult> Details(int? hotelid, int? roomid)
         {
             if (hotelid == null || roomid == null)
@@ -47,6 +57,10 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Create
+        /// <summary>
+        /// Create a hotel room
+        /// </summary>
+        /// <returns>create view</returns>
         public IActionResult Create()
         {
             ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "Name");
@@ -73,6 +87,12 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Edit/5
+        /// <summary>
+        /// Displays details of a hotel room for editing
+        /// </summary>
+        /// <param name="hotelid"></param>
+        /// <param name="roomid"></param>
+        /// <returns>edit view</returns>
         public async Task<IActionResult> Edit(int? hotelid, int? roomid)
         {
             if (hotelid == null || roomid == null)
@@ -128,6 +148,12 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Delete/5
+        /// <summary>
+        /// Show hotel room to be deleted
+        /// </summary>
+        /// <param name="hotelid"></param>
+        /// <param name="roomid"></param>
+        /// <returns>delete view page</returns>
         public async Task<IActionResult> Delete(int hotelid, int roomid)
         {
 
