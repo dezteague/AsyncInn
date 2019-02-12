@@ -18,6 +18,10 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities
+        /// <summary>
+        /// Get all room amenities
+        /// </summary>
+        /// <returns>room amentities view</returns>
         public async Task<IActionResult> Index()
         {
             var asyncInnDbContext = _context.RoomAmenities.Include(r => r.Amenities).Include(r => r.Room);
@@ -25,6 +29,12 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Details/5
+        /// <summary>
+        /// Show details of room amenities
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// <param name="amenityid"></param>
+        /// <returns>details view</returns>
         public async Task<IActionResult> Details(int? roomid, int? amenityid)
         {
             if (roomid == null || amenityid == null)
@@ -45,6 +55,10 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Create
+        /// <summary>
+        /// Create a room amenity
+        /// </summary>
+        /// <returns>create view</returns>
         public IActionResult Create()
         {
             ViewData["AmenitiesID"] = new SelectList(_context.Amenities, "ID", "Name");
@@ -71,6 +85,12 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Edit/5
+        /// <summary>
+        /// display details of a room amenity for editing
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// <param name="amenityid"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? roomid, int? amenityid)
         {
             if (roomid == null && amenityid == null)
@@ -126,6 +146,12 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Delete/5
+        /// <summary>
+        /// show room amenity to be deleted
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// <param name="amenityid"></param>
+        /// <returns>delete view</returns>
         public async Task<IActionResult> Delete(int roomid, int amenityid)
         {
    
