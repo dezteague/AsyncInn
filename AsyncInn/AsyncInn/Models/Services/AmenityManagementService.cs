@@ -13,12 +13,21 @@ namespace AsyncInn.Models.Services
         //connect database to service
         private AsyncInnDbContext _context { get; }
 
+        /// <summary>
+        /// sets db context
+        /// </summary>
+        /// <param name="context"></param>
         public AmenityManagementService(AsyncInnDbContext context)
         {
             _context = context;
         }
 
         //create
+        /// <summary>
+        /// add amenity to the table
+        /// </summary>
+        /// <param name="amenities"></param>
+        /// <returns>table with new amenity</returns>
         public async Task CreateAmenity(Amenities amenities)
         {
             _context.Amenities.Add(amenities);
@@ -26,6 +35,10 @@ namespace AsyncInn.Models.Services
         }
 
         //read
+        /// <summary>
+        /// gets all data from amenity table
+        /// </summary>
+        /// <returns>all amenities</returns>
         public async Task<IEnumerable<Amenities>> GetAmenities()
         {
             return await _context.Amenities.ToListAsync();
@@ -37,6 +50,11 @@ namespace AsyncInn.Models.Services
         }
 
         //update
+        /// <summary>
+        /// update data for a specific amenity
+        /// </summary>
+        /// <param name="amenities"></param>
+        /// <returns>updated amenity</returns>
         public async Task UpdateAmenity(Amenities amenities)
         {
             _context.Amenities.Update(amenities);
@@ -44,6 +62,11 @@ namespace AsyncInn.Models.Services
         }
 
         //delete
+        /// <summary>
+        /// removes an amenity from the table
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>updated table</returns>
         public async Task DeleteAmenity(int id)
         {
             Amenities amenity = _context.Amenities.FirstOrDefault(amen => amen.ID == id);
