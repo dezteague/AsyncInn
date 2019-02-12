@@ -2,7 +2,9 @@
 
 (https://asyncinnwebapp.azurewebsites.net/)
 
- MVC application for Async Inn Hotel management system
+ MVC application for Async Inn Hotel management system using the Microsoft Entity Framework
+ 
+ Utilized dependency injection with interfaces and services so that components are loosely coupled and the web app is not completely reliant on the database.  Services include Amenity Management, Hotel Management, and Room Management.
 
 ## Database Schema
 
