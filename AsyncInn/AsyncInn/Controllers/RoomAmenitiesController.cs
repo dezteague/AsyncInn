@@ -71,6 +71,12 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Show the details of new room amentiy
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="roomAmenities"></param>
+        /// <returns>index view</returns>
         public async Task<IActionResult> Create([Bind("AmenitiesID,RoomID")] RoomAmenities roomAmenities)
         {
             if (ModelState.IsValid)
@@ -116,6 +122,12 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Display details of a room amenity that were edited
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// <param name="amenityid"></param>
+        /// <returns>room amenity view</returns>
         public async Task<IActionResult> Edit(int roomid, int amenityid, [Bind("AmenitiesID,RoomID")] RoomAmenities roomAmenities)
         {
             
@@ -171,6 +183,12 @@ namespace AsyncInn.Controllers
         // POST: RoomAmenities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Asks user to confirm deletion
+        /// </summary>
+        /// <param name="roomid"></param>
+        /// <param name="amenityid"></param>
+        /// <returns>roomamenity view page</returns>
         public async Task<IActionResult> DeleteConfirmed(int roomid, int amenityid)
         {
             var roomAmenities = await _context.RoomAmenities.Include(r => r.Amenities)

@@ -73,6 +73,11 @@ namespace AsyncInn.Controllers
         }
         
         [HttpPost]
+        /// <summary>
+        /// Posts search results
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns>index view</returns>
         public string Index(string searchString, bool notUsed)
         {
             return "From [HttpPost]Index: filter on " + searchString;
@@ -83,6 +88,12 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Show the details of new amentiy
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns>index view</returns>
         public async Task<IActionResult> Create([Bind("ID,Name")] Amenities amenities)
         {
             if (ModelState.IsValid)
@@ -120,6 +131,11 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Display details of an amenity that were edited
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>amenity view</returns>
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name")] Amenities amenities)
         {
             if (id != amenities.ID)
@@ -176,6 +192,11 @@ namespace AsyncInn.Controllers
         // POST: Amenities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Asks user to confirm deletion
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>amenity view page</returns>
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             

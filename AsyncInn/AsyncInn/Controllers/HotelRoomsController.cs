@@ -73,17 +73,32 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Show the details of new hotelroom
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="hotelRoom"></param>
+        /// <returns>index view</returns>
         public async Task<IActionResult> Create([Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(hotelRoom);
-                await _context.SaveChangesAsync();
+                if (ModelState.IsValid)
+                {
+                    _context.Add(hotelRoom);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "ID", hotelRoom.HotelID);
+                ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "ID", hotelRoom.RoomID);
+                return View(hotelRoom);
+            }
+            catch (Exception)
+            {
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HotelID"] = new SelectList(_context.Hotels, "ID", "ID", hotelRoom.HotelID);
-            ViewData["RoomID"] = new SelectList(_context.Rooms, "ID", "ID", hotelRoom.RoomID);
-            return View(hotelRoom);
+            
         }
 
         // GET: HotelRooms/Edit/5
@@ -118,6 +133,13 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Display details of an hotelroom that was edited
+        /// </summary>
+        /// <param name="hotelid"></param>
+        /// <param name="roomid"></param>
+        /// <param name="hotelroom"></param>
+        /// <returns>hotelroom view</returns>
         public async Task<IActionResult> Edit(int hotelid, int roomid, [Bind("HotelID,RoomNumber,RoomID,Rate,PetFriendly")] HotelRoom hotelRoom)
         {
         
@@ -172,6 +194,12 @@ namespace AsyncInn.Controllers
         // POST: HotelRooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Asks user to confirm deletion
+        /// </summary>
+        /// <param name="hotelid"></param>
+        /// <param name="roomid"></param>
+        /// <returns>amenity view page</returns>
         public async Task<IActionResult> DeleteConfirmed(int hotelid, int roomid)
         {
             var hotelRoom = await _context.HotelRooms.Include(h => h.Hotel)

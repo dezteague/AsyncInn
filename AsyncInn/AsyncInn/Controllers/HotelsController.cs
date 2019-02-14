@@ -30,13 +30,21 @@ namespace AsyncInn.Controllers
         /// <returns>hotel view</returns>
         public async Task<IActionResult> Index(string searchString)
         {
-            var hotels = from h in _hotels.Hotels
-                         select h;
-            if (!String.IsNullOrEmpty(searchString))
+            // var hotels = from h in _hotels.Hotels
+            //  select h;
+            var hotelcount = await _hotels.Hotels.ToListAsync();
+            foreach (var i in hotelcount)
             {
-                hotels = hotels.Where(htl => htl.Name.Contains(searchString));
+                i.RoomCount = _hotels.HotelRooms.Where(room => room.HotelID == i.ID).Count();
             }
-            return View(await hotels.ToListAsync());
+
+            
+            if (!String.IsNullOrEmpty(searchString))    
+            {
+                var hotels = _hotels.Hotels.Where(htl => htl.Name.Contains(searchString));
+                return View(hotels);
+            }
+            return View(hotelcount);
         }
 
         // GET: Hotels/Details/5
@@ -73,6 +81,11 @@ namespace AsyncInn.Controllers
         }
 
         [HttpPost]
+        /// <summary>
+        /// Posts search results
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns>index view</returns>
         public string Index(string searchString, bool notUsed)
         {
             return "From [HttpPost]Index: filter on " + searchString;
@@ -83,6 +96,12 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Show the details of new hotel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="hotel"></param>
+        /// <returns>index view</returns>
         public async Task<IActionResult> Create([Bind("ID,Name,Address,Phone")] Hotel hotel)
         {
             if (ModelState.IsValid)
@@ -121,6 +140,12 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Display details of an hotel that were edited
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="hotel"></param>
+        /// <returns>amenity view</returns>
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Address,Phone")] Hotel hotel)
         {
             if (id != hotel.ID)
@@ -177,6 +202,11 @@ namespace AsyncInn.Controllers
         // POST: Hotels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Shows hotel to be deleted
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>delete view page</returns>
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             
