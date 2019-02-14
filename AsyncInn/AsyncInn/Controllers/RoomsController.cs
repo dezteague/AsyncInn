@@ -79,6 +79,11 @@ namespace AsyncInn.Controllers
         }
 
         [HttpPost]
+        /// <summary>
+        /// Posts search results
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns>index view</returns>
         public string Index(string searchString, bool notUsed)
         {
             return "From [HttpPost]Index: filter on " + searchString;
@@ -89,6 +94,12 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Show the details of new amentiy
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="room"></param>
+        /// <returns>index view</returns>
         public async Task<IActionResult> Create([Bind("ID,Name,RoomLayout")] Room room)
         {
             if (ModelState.IsValid)
@@ -125,6 +136,12 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Display details of an room that were edited
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="room"></param>
+        /// <returns>amenity view</returns>
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,RoomLayout")] Room room)
         {
             if (id != room.ID)
@@ -156,6 +173,11 @@ namespace AsyncInn.Controllers
         }
 
         // GET: Rooms/Delete/5
+        /// <summary>
+        /// Shows room to be deleted
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>delete view page</returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -176,6 +198,11 @@ namespace AsyncInn.Controllers
         // POST: Rooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /// <summary>
+        /// Asks user to confirm deletion
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>amenity view page</returns>
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _context.DeleteRoom(id);
