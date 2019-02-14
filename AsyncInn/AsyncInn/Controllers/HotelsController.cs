@@ -30,13 +30,21 @@ namespace AsyncInn.Controllers
         /// <returns>hotel view</returns>
         public async Task<IActionResult> Index(string searchString)
         {
-            var hotels = from h in _hotels.Hotels
-                         select h;
-            if (!String.IsNullOrEmpty(searchString))
+            // var hotels = from h in _hotels.Hotels
+            //  select h;
+            var hotelcount = await _hotels.Hotels.ToListAsync();
+            foreach (var i in hotelcount)
             {
-                hotels = hotels.Where(htl => htl.Name.Contains(searchString));
+                i.RoomCount = _hotels.HotelRooms.Where(room => room.HotelID == i.ID).Count();
             }
-            return View(await hotels.ToListAsync());
+
+            
+            if (!String.IsNullOrEmpty(searchString))    
+            {
+                var hotels = _hotels.Hotels.Where(htl => htl.Name.Contains(searchString));
+                return View(hotels);
+            }
+            return View(hotelcount);
         }
 
         // GET: Hotels/Details/5
