@@ -30,13 +30,19 @@ namespace AsyncInn.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Index(string searchString)
         {
-            var rooms = from r in _rooms.Rooms
-                         select r;
+            //var rooms = from r in _rooms.Rooms
+            //             select r;
+            var roomcount = await _rooms.Rooms.ToListAsync();
+            foreach (var i in roomcount)
+            {
+                i.AmenityCount = _rooms.RoomAmenities.Where(room => room.RoomID == i.ID).Count();
+            }
             if (!String.IsNullOrEmpty(searchString))
             {
-                rooms = rooms.Where(rm => rm.Name.Contains(searchString));
+                var rooms = _rooms.Rooms.Where(rm => rm.Name.Contains(searchString));
+                return View(rooms);
             }
-            return View(await rooms.ToListAsync());
+            return View(roomcount);
         }
 
         // GET: Rooms/Details/5
